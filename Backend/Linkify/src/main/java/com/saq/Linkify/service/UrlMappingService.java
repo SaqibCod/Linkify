@@ -55,14 +55,14 @@ public class UrlMappingService {
     }
 
     public List<UrlMappingDTO> getUrlsByUser(User user) {
-        List<UrlMapping> urlMappings = urlMappingRepository.findUrlMappingsByUser(user);
+        List<UrlMapping> urlMappings = urlMappingRepository.findByUser(user);
         return urlMappings.stream()
                 .map(this::convertToDTO)
                 .toList();
     }
 
     public List<ClickEventDTO> getClickEventsByDate(String shortUrl, LocalDateTime start, LocalDateTime end) {
-        UrlMapping urlMapping = urlMappingRepository.findUrlMappingByShortUrl(shortUrl);
+        UrlMapping urlMapping = urlMappingRepository.findByShortUrl(shortUrl);
         if(urlMapping != null) {
             return clickEventRepository.findByUrlMappingAndClickDateBetween(urlMapping, start, end).stream()
                     .collect(Collectors.groupingBy(click -> click.getClickDate().toLocalDate(), Collectors.counting()))
@@ -78,9 +78,25 @@ public class UrlMappingService {
     }
 
     public Map<LocalDate, Long> getTotalClickByUser(User user, LocalDate start, LocalDate end) {
-        List<UrlMapping> urlMappings = urlMappingRepository.findUrlMappingsByUser(user);
+        List<UrlMapping> urlMappings = urlMappingRepository.findByUser(user);
         List<ClickEvent> clickEvents = clickEventRepository.findByUrlMappingInAndClickDateBetween(urlMappings, start.atStartOfDay(), end.plusDays(1).atStartOfDay());
         return clickEvents.stream()
                 .collect(Collectors.groupingBy(click -> click.getClickDate().toLocalDate(), Collectors.counting()));
+    }
+
+    public UrlMapping getOriginalUrl(String shortUrl) {
+        UrlMapping urlMapping = urlMappingRepository.findByShortUrl(shortUrl);
+        if(urlMapping != null) {
+            urlMapping.setClickCount(urlMapping.getClickCount()+1);
+            urlMappingRepository.save(urlMapping);
+
+            //Record Url
+            ClickEvent clickEvent = new ClickEvent();
+            clickEvent.setClickDate(LocalDateTime.now());
+            clickEvent.setUrlMapping(urlMapping);
+            clickEventRepository.save(clickEvent);
+        }
+
+        return urlMapping;
     }
 }
