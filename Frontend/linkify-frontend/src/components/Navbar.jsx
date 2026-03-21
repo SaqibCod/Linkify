@@ -1,9 +1,10 @@
-import React from 'react'
+import {useState} from 'react'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoIosMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 const Navbar = () => {
-    // const [navbarOpen, setNavbarOpen] = useState(false);
+    const [navbarOpen, setNavbarOpen] = useState(false);
+    const path = useLocation().pathname;
   return (
     
      <div className="h-16 bg-custom-gradient  z-50 flex items-center sticky top-0 ">
@@ -20,9 +21,9 @@ const Navbar = () => {
         >
           <li className="hover:text-btnColor font-[500]  transition-all duration-150">
             <Link
-              // className={`${
-              //   path === "/" ? "text-white font-semibold" : "text-gray-200"
-              // }`}
+              className={`${
+                path === "/" ? "text-white font-semibold" : "text-gray-200"
+              }`}
               to="/"
             >
               Home
@@ -30,16 +31,16 @@ const Navbar = () => {
           </li>
           <li className="hover:text-btnColor font-[500]  transition-all duration-150">
             <Link
-              // className={`${
-              //   path === "/about" ? "text-white font-semibold" : "text-gray-200"
-              // }`}
+              className={`${
+                path === "/about" ? "text-white font-semibold" : "text-gray-200"
+              }`}
               to="/about"
             >
               About
             </Link>
           </li>
-          {/* {token && (
-            <li className="hover:text-btnColor font-[500]  transition-all duration-150">
+          {/* {token && ( */}
+            {/* <li className="hover:text-btnColor font-[500]  transition-all duration-150">
             <Link
               className={`${
                 path === "/dashboard" ? "text-white font-semibold" : "text-gray-200"
@@ -48,33 +49,33 @@ const Navbar = () => {
             >
               Dashboard
             </Link>
-          </li>
-          )}
-          {!token && (
+          </li> */}
+          {/* )}
+          {!token && ( */}
             <Link to="/register">
               <li className=" sm:ml-0 -ml-1 bg-rose-700 text-white  cursor-pointer w-24 text-center font-semibold px-2 py-2 rounded-md  hover:text-slate-300   transition-all duration-150">
                 SignUp
               </li>
             </Link>
-            )}
+            {/* )}
 
-          {token && (
+          {token && ( */}
             <button
-             onClick={onLogOutHandler}
+            //  onClick={onLogOutHandler}
              className="sm:ml-0 -ml-1 bg-rose-700 text-white  cursor-pointer w-24 text-center font-semibold px-2 py-2 rounded-md  hover:text-slate-300   transition-all duration-150">
               LogOut
             </button>
-            )} */}
+            {/* )}  */}
         </ul>
         <button
-          // onClick={() => setNavbarOpen(!navbarOpen)}
+          onClick={() => setNavbarOpen(!navbarOpen)}
           className="sm:hidden flex items-center sm:mt-0 mt-2"
         >
-          {/* {navbarOpen ? (
+          {navbarOpen ? (
             <RxCross2 className="text-white text-3xl" />
           ) : (
             <IoIosMenu className="text-white text-3xl" />
-          )} */}
+          )}
         </button>
       </div>
     </div>
