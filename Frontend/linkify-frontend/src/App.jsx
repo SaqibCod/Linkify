@@ -8,6 +8,7 @@ import About from './components/About'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import Login from './components/Login'
+import DashboadLayout from './components/dashboadLayout/DashboadLayout'
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
         <Route path='/about' element={<About/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/dashboad' element={<DashboadLayout/>}/>
+
         <Route />
       </Routes>
       <Footer />

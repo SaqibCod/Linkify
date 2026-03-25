@@ -4,9 +4,11 @@ import {useForm} from 'react-hook-form'
 import TextField from './TextField'
 import toast from 'react-hot-toast';
 import api from '../api/api';
+import { useStoreContext } from '../contextApi/ContextApi';
 function Login() {
     
     const [loader, setLoader] = useState(false);
+    const {setToken} = useStoreContext();
     const navigate = useNavigate();
     const {
         register,
@@ -30,10 +32,11 @@ function Login() {
             data
           );
           console.log(response.token);
+          setToken(response.token);
           localStorage.setItem("JWT_TOKEN", JSON.stringify(response.token));
           toast.success("Login Successfull!")
           reset();
-          navigate("/");
+          navigate("/dashboad");
         } catch (error) {
           console.log(error)
           toast.error("Login Failed!")

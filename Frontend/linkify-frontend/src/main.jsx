@@ -4,9 +4,12 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
+import { ContextProvider } from './contextApi/ContextApi.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <ContextProvider>
     <App/>
+    </ContextProvider>
   </StrictMode>,
 )
