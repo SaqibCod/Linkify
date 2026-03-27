@@ -242,14 +242,5 @@ export const dummyData = [
       clickDate: "2024-07-20",
       count: 170,
     },
-    {
-      id: 19,
-      clickDate: "2024-07-21",
-      count: 60,
-    },
-    {
-      id: 20,
-      clickDate: "2024-07-22",
-      count: 235,
-    },
+    
   ];

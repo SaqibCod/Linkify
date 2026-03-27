@@ -8,7 +8,7 @@ import About from './components/About'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import Login from './components/Login'
-import DashboadLayout from './components/dashboadLayout/DashboadLayout'
+import DashboadLayout from './components/dashboad/DashboadLayout'
 
 function App() {
 
