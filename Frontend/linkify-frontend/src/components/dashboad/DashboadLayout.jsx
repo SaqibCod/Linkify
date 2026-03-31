@@ -1,8 +1,22 @@
 import React from 'react'
 import Graph from './Graph'
 import { dummyData } from '../../dummyData/data'
+import { useStoreContext } from '../../contextApi/ContextApi'
+import { useFetchTotalClicks } from '../../hooks/useQuery';
 
 function DashboadLayout() {
+  const {token} = useStoreContext();
+  // console.log(token)
+  // function onError(error) {
+  //   console.log(error)
+  // }
+  // const cleanToken = token?.trim();
+  console.log(token)
+ console.log(useFetchTotalClicks(token))
+//  console.log(data)
+//     if(isError) {
+//     console.log("Error fetching data" + isError)
+//    }
   return (
     <div className='lg:px-14 sm:px-8 px-4 min-h-[calc(100vh-64px)]'
     >
