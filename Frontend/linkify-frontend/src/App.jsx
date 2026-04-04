@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import Login from './components/Login'
 import DashboadLayout from './components/dashboad/DashboadLayout'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
     <>
       <BrowserRouter>
       <Navbar />
+      <Toaster/>
       <Routes>
         <Route path='' element={<LandingPage/>}/>
         <Route path='/about' element={<About/>}/>
