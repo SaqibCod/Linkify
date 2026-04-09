@@ -43,6 +43,9 @@ const CreateNewShorten = ({setOpen, refetch}) => {
             className:"mb-5",
             duration:3000,
           });
+          reset();
+          // await refetch();
+          setOpen(false);
         });
        
       } catch (error) {

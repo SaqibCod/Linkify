@@ -17,7 +17,7 @@ function App() {
     <>
       <BrowserRouter>
       <Navbar />
-      <Toaster/>
+      <Toaster />
       <Routes>
         <Route path='' element={<LandingPage/>}/>
         <Route path='/about' element={<About/>}/>

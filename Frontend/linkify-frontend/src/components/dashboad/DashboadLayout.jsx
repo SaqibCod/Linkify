@@ -2,15 +2,19 @@ import {React, useState} from 'react'
 import Graph from './Graph'
 import { dummyData } from '../../dummyData/data'
 import { useStoreContext } from '../../contextApi/ContextApi'
-import { useFetchTotalClicks } from '../../hooks/useQuery';
+import { useFetchMyUrls, useFetchTotalClicks } from '../../hooks/useQuery';
 import ShortenPopUp from './ShortenPopUp';
-
+import ShortUrlsList from './ShortUrlsList';
+import { FaLink } from 'react-icons/fa'
 
 function DashboadLayout() {
   const {token} = useStoreContext();
   const [shortenPopUp, setShortenPopUp] = useState(false);
-  const refetch = false;
+  // const refetch = false;
   const {data: totalClicks, isPending, error} = useFetchTotalClicks(token);
+  const {data: myShortUrls, isPending: isPendingMyUrls, error: errorMyUrls, refetch} = useFetchMyUrls(token);
+
+  console.log(myShortUrls);
  
   return (
     <div className='lg:px-14 sm:px-8 px-4 min-h-[calc(100vh-64px)]'
@@ -34,6 +38,7 @@ function DashboadLayout() {
           }
               <Graph graphData={totalClicks}/>
         </div>
+         
         <div className='py-5 sm:text-end text-center'>
           <button className='bg-custom-gradient px-4 py-2 rounded-md text-white'
           onClick={() => setShortenPopUp(true)}
@@ -41,6 +46,20 @@ function DashboadLayout() {
             Create a New Short URL
           </button>
         </div>
+        <div>
+          {!isPendingMyUrls && myShortUrls.length ===0? (
+            <div className="flex justify-center pt-16">
+                  <div className="flex gap-2 items-center justify-center  py-6 sm:px-8 px-5 rounded-md   shadow-lg  bg-gray-50">
+                    <h1 className="text-slate-800 font-montserrat   sm:text-[18px] text-[14px] font-semibold mb-1 ">
+                      You haven't created any short link yet
+                    </h1>
+                    <FaLink className="text-blue-500 sm:text-xl text-sm " />
+                  </div>
+              </div>
+          ) : (
+            <ShortUrlsList myShortUrls={myShortUrls}/>
+          )}
+          </div>
       </div>
     )}
     <ShortenPopUp 
@@ -48,7 +67,6 @@ function DashboadLayout() {
       setOpen={setShortenPopUp} 
       refetch={refetch} 
       />
-      
         </div>
   )
 }
