@@ -10,26 +10,16 @@ import Navbar from './components/Navbar'
 import Login from './components/Login'
 import DashboadLayout from './components/dashboad/DashboadLayout'
 import { Toaster } from 'react-hot-toast'
+import { getApps } from './utils/helper'
 
 function App() {
 
+  const  CurrentApp = getApps();
   return (
-    <>
-      <BrowserRouter>
-      <Navbar />
-      <Toaster />
-      <Routes>
-        <Route path='' element={<LandingPage/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/dashboad' element={<DashboadLayout/>}/>
-
-        <Route />
-      </Routes>
-      <Footer />
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <CurrentApp />
+    </BrowserRouter>
+    
   )
 }
 
