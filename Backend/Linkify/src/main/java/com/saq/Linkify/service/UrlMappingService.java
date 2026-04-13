@@ -46,6 +46,7 @@ public class UrlMappingService {
 
     public UrlMappingDTO convertToDTO(UrlMapping urlMapping) {
         UrlMappingDTO urlMappingDTO = new UrlMappingDTO();
+        urlMappingDTO.setId(urlMapping.getId());
         urlMappingDTO.setOriginalUrl(urlMapping.getOriginalUrl());
         urlMappingDTO.setShortUrl(urlMapping.getShortUrl());
         urlMappingDTO.setUsername(urlMapping.getUser().getUsername());

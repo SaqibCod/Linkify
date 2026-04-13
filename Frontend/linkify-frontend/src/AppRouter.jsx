@@ -8,23 +8,22 @@ import Register from './components/Register'
 import LandingPage from './components/LandingPage'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ShortenPage from './components/ShortenPage'
+import {PrivateRoute} from './PrivateRoute'
 
 const AppRouter = () => {
     return (
         <>
-      
       <Navbar />
       <Toaster />
       <Routes>
         <Route path='' element={<LandingPage/>}/>
         <Route path='/about' element={<About/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/dashboad' element={<DashboadLayout/>}/>
+        <Route path='/register' element={<PrivateRoute publicPage={true} ><Register /></PrivateRoute>}/>
+        <Route path='/login' element={<PrivateRoute publicPage={true} ><Login /></PrivateRoute>}/>
+        <Route path='/dashboad' element={<PrivateRoute publicPage={false} ><DashboadLayout /></PrivateRoute>}/>
 
       </Routes>
       <Footer />
-     
     </>
     )
 }
