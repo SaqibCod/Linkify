@@ -8,7 +8,8 @@ import Register from './components/Register'
 import LandingPage from './components/LandingPage'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ShortenPage from './components/ShortenPage'
-import {PrivateRoute} from './PrivateRoute'
+import PrivateRoute from './PrivateRoute'
+import ErrorPage from './components/ErrorPage'
 
 const AppRouter = () => {
     return (
@@ -20,7 +21,10 @@ const AppRouter = () => {
         <Route path='/about' element={<About/>}/>
         <Route path='/register' element={<PrivateRoute publicPage={true} ><Register /></PrivateRoute>}/>
         <Route path='/login' element={<PrivateRoute publicPage={true} ><Login /></PrivateRoute>}/>
-        <Route path='/dashboad' element={<PrivateRoute publicPage={false} ><DashboadLayout /></PrivateRoute>}/>
+        <Route path='/dashboard' element={<PrivateRoute publicPage={false} ><DashboadLayout /></PrivateRoute>}/>
+        <Route path='/error' element={<ErrorPage/>}/>
+        <Route path='/*' element={<ErrorPage/>}/>
+
 
       </Routes>
       <Footer />

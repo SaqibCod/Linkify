@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import { motion } from 'framer-motion'
 import Card from './Card'
 import { useNavigate } from 'react-router-dom'
 import { useStoreContext } from '../contextApi/ContextApi';
+import { Canvas } from '@react-three/fiber'
+import Knot from "../../public/Knot"
+import { Environment, OrbitControls } from '@react-three/drei'
 
 
 let desc =
@@ -17,8 +20,8 @@ const LandingPage = () => {
   };
     
   return (
-      <div className="min-h-[calc(100vh-64px)]  lg:px-14 sm:px-8 px-4">
-      <div className="lg:flex-row flex-col    lg:py-5   pt-16   lg:gap-10 gap-8 flex justify-between items-center">
+      <div className="min-h-[calc(100vh-64px)]  lg:px-14 sm:px-8 px-4"  >
+      <div className="lg:flex-row flex-col lg:py-5 pt-16 lg:gap-10 gap-8 flex justify-between items-center">
         <div className=" flex-1">
           <motion.h1
             initial={{ opacity: 0, y: -80 }}
@@ -48,9 +51,9 @@ const LandingPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               onClick={dashBoardNavigateHandler}
-              className="bg-custom-gradient  w-40 text-white rounded-md py-2"
+              className="bg-navfoot-gradient  w-40 text-white rounded-md py-2"
             >
-              Manage Links
+              Manage Links 
             </motion.button>
             <motion.button
               initial={{ opacity: 0, y: 80 }}
@@ -67,18 +70,17 @@ const LandingPage = () => {
             </motion.button>
           </div>
         </div>
-        <div className="   flex-1 flex   justify-center w-full">
-          <motion.img
-            initial={{ opacity: 0 }}
-            whileInView={{
-              opacity: 1,
-            }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="sm:w-[480px] w-[400px] object-cover rounded-md"
-            src="/images/img2.png"
-            alt=""
-          />
+        <div className="flex-1 w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px]">
+         <Canvas >
+          <ambientLight />
+          <directionalLight position={[10, 10, 5]} intensity={1.2} color={0xffffff} />
+          <OrbitControls  />
+              <Suspense fallback={null}>
+            <Knot />
+               <Environment preset="city" />
+              </Suspense>
+         </Canvas>
+        
         </div>
       </div>
       <div className="sm:pt-12 pt-7">

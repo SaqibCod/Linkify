@@ -12,6 +12,7 @@ import Graph from './Graph';
 import { Hourglass } from 'react-loader-spinner';
 
 
+
 const ShortUrlItem = ({originalUrl, shortUrl, clickCount, createdDate}) => {
     const subDomain = import.meta.env.VITE_REACT_SUBDOMAIN.replace(
             /^https?:\/\//,
@@ -37,7 +38,10 @@ const ShortUrlItem = ({originalUrl, shortUrl, clickCount, createdDate}) => {
     const fetchAnalyticsData = async (shortUrl) => {
       setLoader(true);
       try {
-        const response = await api.get(`/api/urls/analytic/${shortUrl}?startDate=2025-12-01T00:00:00&endDate=2026-12-31T23:59:59`,{
+        const endDate = new Date();
+        const startDate = endDate - (30 * 24 * 60 * 60 * 1000);
+        const formatDate = (date) => date.toISOString().split('T')[0]; 
+        const response = await api.get(`/api/urls/analytic/${shortUrl}?startDate=${formatDate(startDate)}&endDate=${formatDate(endDate)}`,{
              headers: {
                         "Content-Type": "application/json",
                         Accept: "application/json",
@@ -45,7 +49,7 @@ const ShortUrlItem = ({originalUrl, shortUrl, clickCount, createdDate}) => {
                     },
         });
         setAnalyticsData(response.data);
-        console.log("Analytics data:", analyticsData);
+        // console.log("Analytics data:", analyticsData);
       } catch (error) {
         console.error("Error fetching analytics data:", error);
         navigator('/error');
@@ -127,10 +131,11 @@ const ShortUrlItem = ({originalUrl, shortUrl, clickCount, createdDate}) => {
              </div>
           </div>
         </div>
+      </div>  
     <React.Fragment>
         <div className={`${
             analyticToggle ? "flex" : "hidden"
-          }  max-h-96 sm:mt-0 mt-5 min-h-96 relative  border-t-2 w-[100%] overflow-hidden `}>
+          }  max-h-96 sm:mt-0 mt-5 min-h-96 relative  border-t-2 w-full overflow-hidden `}>
             {loader ? (
               <div className="min-h-[calc(450px-140px)] flex justify-center items-center w-full">
                     <div className="flex flex-col items-center gap-1">
@@ -159,17 +164,17 @@ const ShortUrlItem = ({originalUrl, shortUrl, clickCount, createdDate}) => {
                                 coming from
                             </h3>
                         </div>
+                        
              )}
               <Graph graphData={analyticsData}/>
              </>
-
             )}
 
           </div>  
     </React.Fragment>
-          </div>
+          
           </div>
   )
 }
 
-export default ShortUrlItem
+export default ShortUrlItem;
