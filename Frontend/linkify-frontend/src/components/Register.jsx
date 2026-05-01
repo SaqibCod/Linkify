@@ -4,6 +4,7 @@ import {useForm} from 'react-hook-form'
 import TextField from './TextField'
 import toast from 'react-hot-toast';
 import api from '../api/api';
+import { color } from 'three/src/nodes/tsl/TSLCore.js';
 const Register = () => {
     const [loader, setLoader] = useState(false);
     const navigate = useNavigate();
@@ -41,11 +42,11 @@ const Register = () => {
     
   return (
     <div
-className='min-h-[calc(100vh-64px)] flex justify-center items-center '>
+className='min-h-[calc(100vh-64px)] flex justify-center items-center  '>
         <form onSubmit={handleSubmit(registerHandler)}
-        className='sm:sm:w-112.5 w-[360px] shadow-custom py-8 sm:px-8 px-4 rounded-md '>
+        className='sm:sm:w-112.5 w-[360px] shadow-custom shadow-secondary py-8 sm:px-8 px-4 rounded-md '>
           <h1
-          className='text-center font-serif text-btn font-bold lg:text-3xl text-2xl'>
+          className='text-center font-serif text-card-title font-bold lg:text-3xl text-2xl'>
             Register Here
           </h1>
           <hr className='mt-2 mb-5 text-slate-400'/>
@@ -89,12 +90,12 @@ className='min-h-[calc(100vh-64px)] flex justify-center items-center '>
              >
               {loader ? "Loading...": "Register"}
              </button>
-             <p className='text-center text-sm text-slate-700 mt-6'>
+             <p className='text-center text-sm text-slate-400 mt-6'>
               Already have an account?
               <Link to="/login"
                 className='font-semibold underline hover:text-black'
               >
-              <span className='text-btn'>
+              <span className='text-blue-500'>
                 Login
               </span>
               </Link>

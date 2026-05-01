@@ -64,7 +64,7 @@ const CreateNewShorten = ({setOpen, refetch}) => {
     <div className=" flex justify-center items-center bg-white rounded-md">
     <form
         onSubmit={handleSubmit(createNewShortUrlHandler)}
-        className="sm:w-[450px] w-[360px] relative  shadow-custom pt-8 pb-5 sm:px-8 px-4 rounded-lg"
+        className="sm:w-[450px] w-[360px] relative shadow-custom pt-8 pb-5 sm:px-8 px-4 rounded-lg"
       >
 
         <h1 className="font-montserrat sm:mt-0 mt-3 text-center  font-bold sm:text-2xl text-[22px] text-slate-800 ">

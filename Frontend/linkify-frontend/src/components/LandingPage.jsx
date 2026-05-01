@@ -6,6 +6,7 @@ import { useStoreContext } from '../contextApi/ContextApi';
 import { Canvas } from '@react-three/fiber'
 import Knot from "../../public/Knot"
 import { Environment, OrbitControls } from '@react-three/drei'
+import { useTheme } from '../contextApi/ThemeContext';
 
 
 let desc =
@@ -14,14 +15,15 @@ const LandingPage = () => {
     const navigate = useNavigate();
     const { token } = useStoreContext();
     console.log("TOKEN FROM LANDING PAGE: " + token);
-
+    const { theme, toggleTheme } = useTheme(); 
+    console.log("THEME FROM LANDING PAGE: " + theme);
   const dashBoardNavigateHandler = () => {
 
   };
     
   return (
       <div className="min-h-[calc(100vh-64px)]  lg:px-14 sm:px-8 px-4"  >
-      <div className="lg:flex-row flex-col lg:py-5 pt-16 lg:gap-10 gap-8 flex justify-between items-center">
+      <div className="lg:flex-row flex-col lg:py-0 py-16 lg:gap-10 gap-8 flex justify-between items-center">
         <div className=" flex-1">
           <motion.h1
             initial={{ opacity: 0, y: -80 }}
@@ -31,11 +33,11 @@ const LandingPage = () => {
             }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-bold font-roboto md:text-5xl sm:text-4xl text-3xl   md:leading-[55px] sm:leading-[45px] leading-10 lg:w-full md:w-[70%] w-full text-primary"
+            className="font-bold font-roboto md:text-5xl sm:text-4xl text-3xl md:leading-[55px] sm:leading-11.25 leading-10 lg:w-full md:w-[70%] w-full text-primary"
           >
-            Link Simplifies URL Shortening For Efficient Sharing.
+            <span className="text-hero-heading"> Link </span> Simplifies URL Shortening For Efficient Sharing.
           </motion.h1>
-          <p className="text-sm my-5 text-secondary">
+          <p className="text-sm my-5 text-para-color">
             Linkify streamlines the process of URL shortening, making sharing
             links effortless and efficient. With its user-friendly interface,
             Linkify allows you to generate concise, easy-to-share URLs in
@@ -64,7 +66,7 @@ const LandingPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               onClick={dashBoardNavigateHandler}
-              className="border border-btn text-btn w-40 rounded-md py-2"
+              className="border border-blue-400 text-blue-400 w-40 rounded-md py-2"
             >
               Create Short Link
             </motion.button>

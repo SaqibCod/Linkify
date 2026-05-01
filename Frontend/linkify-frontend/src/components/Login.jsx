@@ -48,12 +48,12 @@ function Login() {
     <div
 className='min-h-[calc(100vh-64px)] flex justify-center items-center'>
         <form onSubmit={handleSubmit(loginHandler)}
-        className='sm:sm:w-112.5 w-[360px] shadow-custom py-8 sm:px-8 px-4 rounded-md'>
+        className='sm:sm:w-112.5 w-[360px] shadow-custom shadow-secondary py-8 sm:px-8 px-4 rounded-md'>
           <h1
-          className='text-center font-serif text-btn font-bold lg:text-3xl text-2xl'>
+          className='text-center font-serif text-card-title font-bold lg:text-3xl text-2xl'>
             Login Here
           </h1>
-          <hr className='mt-2 mb-5 text-black'/>
+          <hr className='mt-2 mb-5 text-slate-400'/>
           <div className='flex flex-col gap-3'>
              <TextField 
                 label="Username: "
@@ -84,12 +84,12 @@ className='min-h-[calc(100vh-64px)] flex justify-center items-center'>
              >
               {loader ? "Loading...": "Login"}
              </button>
-             <p className='text-center text-sm text-slate-700 mt-6'>
+             <p className='text-center text-sm text-slate-400 mt-6'>
               Don't have an account?
               <Link to="/register"
                 className='font-semibold underline hover:text-black'
               >
-              <span className='text-btn'>
+              <span className='text-blue-500'>
                 Register
               </span>
               </Link>

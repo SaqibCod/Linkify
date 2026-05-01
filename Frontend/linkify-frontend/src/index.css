@@ -10,8 +10,17 @@
   --color-background: #ffffff;
   --color-043780: #043780;
   --color-476f95: #476f95;
+  --color-C2E8FF: #C2E8FF;
+  --color-7EA0C5: #7EA0C5;
+  --color-5482B4: #5482B4;
+  --color-052659: #052659;
+  
 
-  /* --color-nav: #020764; */
+
+  --color-hero-heading: var(--color-5482B4);
+  --color-secondary: var(--color-7EA0C5);
+  --color-para-color: var(--color-052659);
+  --color-card-title: #011025;
 
   /* 🖼️ Background Gradients */
   /* --bg-custom-gradient: linear-gradient(to right, #3b82f6, #9333ea);
@@ -45,6 +54,8 @@
 .dark {
   --color-background: #030812;
   --color-foreground: #f8fafc;
+  --color-para-color: #cbd5e1;
+  --color-card-title: rgba(253, 254, 255, 0.962);
 }
 
 body {
