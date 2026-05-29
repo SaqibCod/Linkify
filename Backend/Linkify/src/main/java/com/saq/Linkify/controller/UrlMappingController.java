@@ -31,7 +31,7 @@ public class UrlMappingController {
     public ResponseEntity<UrlMappingDTO> createShortUrl(@RequestBody Map<String, String> request,
                                                         Principal principal
                                                         ) {
-        String originalUrl = request.get("OriginalUrl");
+        String originalUrl = request.get("originalUrl");
         User user = userService.findByUsername(principal.getName());
         UrlMappingDTO urlMappingDTO = urlMappingService.createShortUrl(originalUrl, user);
         return ResponseEntity.ok(urlMappingDTO);

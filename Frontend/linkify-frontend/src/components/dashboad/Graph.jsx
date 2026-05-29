@@ -1,5 +1,6 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
+
 import {
   Chart as ChartJS,
   BarElement,
@@ -8,10 +9,14 @@ import {
   Legend,
   Tooltip,
   Filler,
+  PointElement,
+  LineElement,
 } from "chart.js";
 
 ChartJS.register(
+  PointElement,
   BarElement,
+  LineElement,
   Tooltip,
   CategoryScale,
   LinearScale,
@@ -20,30 +25,51 @@ ChartJS.register(
 );
 
 const Graph = ({ graphData }) => {
-  const labels = graphData?.map((item, i) => `${item.clickDate}`);
-  const userPerData = graphData?.map((item) => item.clickCount);
+  const hasGraphData = Array.isArray(graphData) && graphData.length > 0;
+  const labels = hasGraphData ? graphData.map((item) => `${item.clickDate}`) : [];
+  const userPerData = hasGraphData ? graphData.map((item) => item.clickCount) : [];
+
+  // This function creates the vertical gradient for the area under the line
+  const createGradient = (ctx, top, bottom) => {
+    const gradient = ctx.createLinearGradient(0, bottom, 0, top);
+    gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');        // Transparent at the bottom
+    gradient.addColorStop(1, 'rgba(54, 162, 235, 0.4)'); // Light blue at the top
+    return gradient;
+  };
+
 
   const data = {
     labels:
-     graphData.length > 0
+      hasGraphData
         ? labels
         : ["", "", "", "", "", "", "", "", "", "", "", "", "", ""],
     datasets: [
       {
         label: "Total Clicks",
         data:
-         graphData.length > 0
+          hasGraphData
             ? userPerData
             : [1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1],
+
+
+        // Line Styling
+        borderColor: '#36A2EB',
+        borderWidth: 2,
+        tension: 0.5,
         backgroundColor:
-         graphData.length > 0 ? "#3b82f6" : "rgba(54, 162, 235, 0.1)",
-        borderColor: "#1D2327",
-        pointBorderColor: "red",
+          hasGraphData ? (context) => {
+            const { ctx, chartArea } = context.chart;
+            if (!chartArea) {
+              return "rgba(54, 162, 235, 0.1)";
+            }
+            return createGradient(ctx, chartArea.top, chartArea.bottom);
+          }
+            : "rgba(54, 162, 235, 0.1)",
         fill: true,
-        tension: 0.4,
-        barThickness: 20,
-        categoryPercentage: 1.5,
-        barPercentage: 1.5,
+        pointBackgroundColor: '#36A2EB',
+        pointBorderColor: '#fff',
+        pointHoverRadius: 6,
+        pointRadius: 4,
       },
     ],
   };
@@ -60,7 +86,7 @@ const Graph = ({ graphData }) => {
       y: {
         beginAtZero: true,
         ticks: {
-          // stepSize: 1,
+          stepSize: 1,
           callback: function (value) {
             if (Number.isInteger(value)) {
               return value.toString();
@@ -81,9 +107,9 @@ const Graph = ({ graphData }) => {
       },
       x: {
         beginAtZero: true,
-        // ticks: {
-        //   stepSize: 1,
-        // },
+        ticks: {
+          stepSize: 1,
+        },
         title: {
           display: true,
           text: "Date",
@@ -98,7 +124,7 @@ const Graph = ({ graphData }) => {
     },
   };
 
-  return <Bar className=" w-full" data={data} options={options}></Bar>;
+  return <Line className=" w-full" data={data} options={options}></Line>;
 };
 
 export default Graph;

@@ -14,6 +14,7 @@
   --color-7EA0C5: #7EA0C5;
   --color-5482B4: #5482B4;
   --color-052659: #052659;
+ 
   
 
 
@@ -21,6 +22,7 @@
   --color-secondary: var(--color-7EA0C5);
   --color-para-color: var(--color-052659);
   --color-card-title: #011025;
+
 
   /* 🖼️ Background Gradients */
   /* --bg-custom-gradient: linear-gradient(to right, #3b82f6, #9333ea);
